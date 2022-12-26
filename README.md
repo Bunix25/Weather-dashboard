@@ -23,7 +23,7 @@ Desktop screen
 ### Open your favorite web browser and enter the following web address to access.
 
 ```html
-https://es api-weather-dashboard/
+https://bunix25.github.io/Weather-dashboard/
 ```
 <a name="usage"></a>
 ## 3. Usage Tips
