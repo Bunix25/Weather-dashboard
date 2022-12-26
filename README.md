@@ -14,7 +14,7 @@
 This application is to catch your current and five day forecast in one view. It also saves your cities searched for later use.
 
 Desktop screen 
-( "![Alt text](assets/images/1.png)")
+![Alt text](assets/images/1.png)
 
 
 <a name="web-address"></a>
