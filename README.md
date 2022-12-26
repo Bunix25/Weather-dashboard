@@ -32,7 +32,7 @@ https://es api-weather-dashboard/
 
 #### Enter a city and click the magnifying glass to get your forecast results.
 
-![nav-menu](![Alt text](assets/images/2.png)"one-city-searched")
+![Alt text](assets/images/2.png)"one-city-searched"
 
 ### Add more cities by searching for other cities
 ### Click on any city saved to search for that city again
