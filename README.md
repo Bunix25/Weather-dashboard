@@ -37,11 +37,11 @@ https://es api-weather-dashboard/
 ### Add more cities by searching for other cities
 ### Click on any city saved to search for that city again
 
-![nav-menu](![Alt text](assets/images/3.png)"one-city-searched-2")
+![Alt text](assets/images/3.png)"one-city-searched-2"
 
 ### Refresh the page to validate local storage saving.
 
-![nav-menu](![Alt text](assets/images/4.png)"refresh-clicked")
+![Alt text](assets/images/4.png)"refresh-clicked"
 
 <a name="contributing"></a>
 ## 4. Contributing
