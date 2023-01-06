@@ -11,29 +11,22 @@ var currentDay = moment().format('M/DD/YYYY');
 const weatherIconUrl = 'http://openweathermap.org/img/wn/';
 var searchHistoryArray = loadSearchHistory();
 
-
-// Define function to capitalize the first letter of a string
 function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
-        // Assign it back to the array
         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    
     }
-    // Directly return the joined string
     return splitStr.join(' ');
 }
 
-//load cities from local storage and recreate history buttons
 function loadSearchHistory() {
     var searchHistoryArray = JSON.parse(localStorage.getItem('search history'));
-
-    // if nothing in localStorage, create a new object to track all user info
     if (!searchHistoryArray) {
         searchHistoryArray = {
             searchedCity: [],
         };
     } else {
-        //add search history buttons to page
         for (var i = 0; i < searchHistoryArray.searchedCity.length; i++) {
             searchHistory(searchHistoryArray.searchedCity[i]);
         }
@@ -42,12 +35,10 @@ function loadSearchHistory() {
     return searchHistoryArray;
 }
 
-//save to local storage
 function saveSearchHistory() {
     localStorage.setItem('search history', JSON.stringify(searchHistoryArray));
 };
 
-//funciton to create history buttons
 function searchHistory(city) {
     var searchHistoryBtn = $('<button>')
         .addClass('btn')
@@ -62,58 +53,43 @@ function searchHistory(city) {
             type: 'button'
         });
 
-    // append btn to search history div
     searchHistoryEl.append(searchHistoryBtn);
 }
 
-//function to get weather data from apiUrl
 function getWeather(city) {
-    // apiUrl for coordinates
     var apiCoordinatesUrl = openWeatherCoordinatesUrl + city + '&appid=' + openWeatherApiKey;
-    // fetch the coordinates for parameter city
     fetch(apiCoordinatesUrl)
         .then(function (coordinateResponse) {
             if (coordinateResponse.ok) {
                 coordinateResponse.json().then(function (data) {
                     var cityLatitude = data.coord.lat;
                     var cityLongitude = data.coord.lon;
-                    // fetch weather information
                     var apiOneCallUrl = oneCallUrl + cityLatitude + '&lon=' + cityLongitude + '&appid=' + openWeatherApiKey + '&units=imperial';
 
                     fetch(apiOneCallUrl)
                         .then(function (weatherResponse) {
                             if (weatherResponse.ok) {
                                 weatherResponse.json().then(function (weatherData) {
-
-                                    // ** START CURRENT DAY DISPLAY ** //
-
-                                    //add div to hold current day details
                                     var currentWeatherEl = $('<div>')
                                         .attr({
                                             id: 'current-weather'
                                         })
-
-                                    // get the weather icon from city
                                     var weatherIcon = weatherData.current.weather[0].icon;
                                     var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
-
-                                    // create h2 to display city + current day + current weather icon
                                     var currentWeatherHeadingEl = $('<h2>')
                                         .text(city + ' (' + currentDay + ')');
-                                    // create img element to display icon
                                     var iconImgEl = $('<img>')
                                         .attr({
                                             id: 'current-weather-icon',
                                             src: cityCurrentWeatherIcon,
                                             alt: 'Weather Icon'
                                         })
-                                    //create list of current weather details
+                                    
                                     var currWeatherListEl = $('<ul>')
 
                                     var currWeatherDetails = ['Temp: ' + weatherData.current.temp + ' °F', 'Wind: ' + weatherData.current.wind_speed + ' MPH', 'Humidity: ' + weatherData.current.humidity + '%', 'UV Index: ' + weatherData.current.uvi]
 
-                                    for (var i = 0; i < currWeatherDetails.length; i++) {
-                                        //create an indiviual list item and append to ul
+                                    for (var i = 0; i < currWeatherDetails.length; i++) 
 
                                         // run conditional to assign background color to UV index depending how high it is
                                         if (currWeatherDetails[i] === 'UV Index: ' + weatherData.current.uvi) {
@@ -166,10 +142,10 @@ function getWeather(city) {
                                             id: 'five-day-header'
                                         })
 
-                                    //append 5 day forecast header to col2 after current weather div
+                                    
                                     $('#current-weather').after(fiveDayHeaderEl)
 
-                                    // create array for the dates for the next 5 days
+                                    
 
                                     var fiveDayArray = [];
 
@@ -179,22 +155,22 @@ function getWeather(city) {
                                         fiveDayArray.push(forecastDate);
                                     }
 
-                                    // for each date in the array create a card displaying temp, wind and humidity
+                                    
                                     for (var i = 0; i < fiveDayArray.length; i++) {
-                                        // create a div for each card
+                                        
                                         var cardDivEl = $('<div>')
                                             .addClass('col3');
 
-                                        // create div for the card body
+                                        
                                         var cardBodyDivEl = $('<div>')
                                             .addClass('card-body');
 
-                                        // create the card-title
+                                        
                                         var cardTitleEl = $('<h3>')
                                             .addClass('card-title')
                                             .text(fiveDayArray[i]);
 
-                                        // create the icon for current day weather
+                                        
                                         var forecastIcon = weatherData.daily[i].weather[0].icon;
 
                                         var forecastIconEl = $('<img>')
@@ -203,17 +179,17 @@ function getWeather(city) {
                                                 alt: 'Weather Icon'
                                             });
 
-                                        // create card text displaying weather details
+                                        
                                         var currWeatherDetails = ['Temp: ' + weatherData.current.temp + ' °F', 'Wind: ' + weatherData.current.wind_speed + ' MPH', 'Humidity: ' + weatherData.current.humidity + '%', 'UV Index: ' + weatherData.current.uvi]
-                                        //create temp
+                             
                                         var tempEL = $('<p>')
                                             .addClass('card-text')
                                             .text('Temp: ' + weatherData.daily[i].temp.max)
-                                        //create wind
+                                        
                                         var windEL = $('<p>')
                                             .addClass('card-text')
                                             .text('Wind: ' + weatherData.daily[i].wind_speed + ' MPH')
-                                        // create humidity
+                                        
                                         var humidityEL = $('<p>')
                                             .addClass('card-text')
                                             .text('Humidity: ' + weatherData.daily[i].humidity + '%')
@@ -251,16 +227,12 @@ function getWeather(city) {
         });
 }
 
-//function to push button elements to 
-
 function submitCitySearch(event) {
     event.preventDefault();
 
-    //get value from user input
     var city = titleCase(cityInputEl.val().trim());
 
-    //prevent them from searching for cities stored in local storage
-    if (searchHistoryArray.searchedCity.includes(city)) {
+   if (searchHistoryArray.searchedCity.includes(city)) {
         alert(city + ' is included in history below. Click the ' + city + ' button to get weather.');
         cityInputEl.val('');
     } else if (city) {
@@ -268,19 +240,15 @@ function submitCitySearch(event) {
         searchHistory(city);
         searchHistoryArray.searchedCity.push(city);
         saveSearchHistory();
-        //empty the form text area
         cityInputEl.val('');
         
-        //if user doesn't type in a city
-    } else {
+      } else {
         alert('Please enter a city');
     }
 }
 
-// on submission of user data get user input for city and fetch api data
 userFormEL.on('submit', submitCitySearch);
 
-// on click of search button - empty the current weather and 5-day forecast info
 $('#search-btn').on('click', function () {
     $('#current-weather').remove();
     $('#five-day').empty();
