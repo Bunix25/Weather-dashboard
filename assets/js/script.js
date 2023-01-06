@@ -122,21 +122,15 @@ function getWeather(city) {
 
                                     }
 
-                                    //append curr weather div to col2 before #five-day
-                                    $('#five-day').before(currentWeatherEl);
-                                    //append current weather heading to current weather div
+                                     $('#five-day').before(currentWeatherEl);
+                                    
                                     currentWeatherEl.append(currentWeatherHeadingEl);
-                                    //append icon to current weather header
+                                    
                                     currentWeatherHeadingEl.append(iconImgEl);
-                                    //append ul to current weather
+                                    
                                     currentWeatherEl.append(currWeatherListEl);
 
-                                    // ** END CURRENT DAY DISPLAY ** //
-
-                                    // ** START 5-DAY FORECAST DISPLAY ** //
-
-                                    //create h2 header for 5-day forecast
-                                    var fiveDayHeaderEl = $('<h2>')
+                                   var fiveDayHeaderEl = $('<h2>')
                                         .text('5-Day Forecast:')
                                         .attr({
                                             id: 'five-day-header'
@@ -195,28 +189,28 @@ function getWeather(city) {
                                             .text('Humidity: ' + weatherData.daily[i].humidity + '%')
 
 
-                                        //append cardDivEl to the #five-day container
+                                        
                                         fiveDayEl.append(cardDivEl);
-                                        //append cardBodyDivEL to cardDivEl
+                                        
                                         cardDivEl.append(cardBodyDivEl);
-                                        //append card title to card body
+                                        
                                         cardBodyDivEl.append(cardTitleEl);
-                                        //append icon to card body
+                                        
                                         cardBodyDivEl.append(forecastIconEl);
-                                        //append temp details to card body
+                                        
                                         cardBodyDivEl.append(tempEL);
-                                        //append wind details to card body
+                                        
                                         cardBodyDivEl.append(windEL);
-                                        //append humidity details to card body
+                                        
                                         cardBodyDivEl.append(humidityEL);
                                     }
 
-                                    // ** END 5-DAY FORECAST DISPLAY ** //
+                                    
                                 })
                             }
                         })
                 });
-                // if fetch goes through but Open Weather can't find details for city
+                
             } else {
                 alert('Error: Open Weather could not find city')
             }
