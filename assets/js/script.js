@@ -15,13 +15,13 @@ function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    
     }
     return splitStr.join(' ');
 }
 
 function loadSearchHistory() {
     var searchHistoryArray = JSON.parse(localStorage.getItem('search history'));
+
     if (!searchHistoryArray) {
         searchHistoryArray = {
             searchedCity: [],
@@ -70,14 +70,18 @@ function getWeather(city) {
                         .then(function (weatherResponse) {
                             if (weatherResponse.ok) {
                                 weatherResponse.json().then(function (weatherData) {
-                                    var currentWeatherEl = $('<div>')
+
+                                  var currentWeatherEl = $('<div>')
                                         .attr({
                                             id: 'current-weather'
                                         })
-                                    var weatherIcon = weatherData.current.weather[0].icon;
+                                         var weatherIcon = weatherData.current.weather[0].icon;
                                     var cityCurrentWeatherIcon = weatherIconUrl + weatherIcon + '.png';
+
+                                
                                     var currentWeatherHeadingEl = $('<h2>')
                                         .text(city + ' (' + currentDay + ')');
+                                    
                                     var iconImgEl = $('<img>')
                                         .attr({
                                             id: 'current-weather-icon',
@@ -89,9 +93,10 @@ function getWeather(city) {
 
                                     var currWeatherDetails = ['Temp: ' + weatherData.current.temp + ' °F', 'Wind: ' + weatherData.current.wind_speed + ' MPH', 'Humidity: ' + weatherData.current.humidity + '%', 'UV Index: ' + weatherData.current.uvi]
 
-                                    for (var i = 0; i < currWeatherDetails.length; i++) 
+                                    for (var i = 0; i < currWeatherDetails.length; i++) {
+                                        
 
-                                        // run conditional to assign background color to UV index depending how high it is
+                                        
                                         if (currWeatherDetails[i] === 'UV Index: ' + weatherData.current.uvi) {
 
                                             var currWeatherListItem = $('<li>')
@@ -112,17 +117,18 @@ function getWeather(city) {
 
                                             currWeatherListItem.append(uviItem);
 
-                                            //create every list item that isn't uvIndex
+                                            
                                         } else {
                                             var currWeatherListItem = $('<li>')
                                                 .text(currWeatherDetails[i])
-                                            //append to ul
+                                            
                                             currWeatherListEl.append(currWeatherListItem);
                                         }
 
                                     }
 
-                                     $('#five-day').before(currentWeatherEl);
+                                    
+                                    $('#five-day').before(currentWeatherEl);
                                     
                                     currentWeatherEl.append(currentWeatherHeadingEl);
                                     
@@ -130,7 +136,7 @@ function getWeather(city) {
                                     
                                     currentWeatherEl.append(currWeatherListEl);
 
-                                   var fiveDayHeaderEl = $('<h2>')
+                                    var fiveDayHeaderEl = $('<h2>')
                                         .text('5-Day Forecast:')
                                         .attr({
                                             id: 'five-day-header'
@@ -139,7 +145,7 @@ function getWeather(city) {
                                     
                                     $('#current-weather').after(fiveDayHeaderEl)
 
-                                    
+                                
 
                                     var fiveDayArray = [];
 
@@ -175,7 +181,7 @@ function getWeather(city) {
 
                                         
                                         var currWeatherDetails = ['Temp: ' + weatherData.current.temp + ' °F', 'Wind: ' + weatherData.current.wind_speed + ' MPH', 'Humidity: ' + weatherData.current.humidity + '%', 'UV Index: ' + weatherData.current.uvi]
-                             
+                                        
                                         var tempEL = $('<p>')
                                             .addClass('card-text')
                                             .text('Temp: ' + weatherData.daily[i].temp.max)
@@ -215,18 +221,22 @@ function getWeather(city) {
                 alert('Error: Open Weather could not find city')
             }
         })
-        // if fetch fails
+        
         .catch(function (error) {
             alert('Unable to connect to Open Weather');
         });
 }
 
+ 
+
 function submitCitySearch(event) {
     event.preventDefault();
 
+    
     var city = titleCase(cityInputEl.val().trim());
 
-   if (searchHistoryArray.searchedCity.includes(city)) {
+    
+    if (searchHistoryArray.searchedCity.includes(city)) {
         alert(city + ' is included in history below. Click the ' + city + ' button to get weather.');
         cityInputEl.val('');
     } else if (city) {
@@ -234,17 +244,22 @@ function submitCitySearch(event) {
         searchHistory(city);
         searchHistoryArray.searchedCity.push(city);
         saveSearchHistory();
+        
         cityInputEl.val('');
         
-      } else {
+        
+    } else {
         alert('Please enter a city');
     }
 }
 
+
 userFormEL.on('submit', submitCitySearch);
+
 
 $('#search-btn').on('click', function () {
     $('#current-weather').remove();
     $('#five-day').empty();
     $('#five-day-header').remove();
 })
+
