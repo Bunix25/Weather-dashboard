@@ -1,4 +1,4 @@
-/* add default's to weppage */
+
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +45,7 @@
 /* make body full page size depending on viewport */
 body { min-height: 100vh; }
 
-/* style the header */
+
 header {
     text-align: center;
     padding-top: 5px;
@@ -131,7 +131,7 @@ ul {
     margin-left: 1%;
 }
 
-/* style the icon */
+
 #current-weather-icon {
     filter: drop-shadow(0 0 0.75rem grey);
 }
@@ -186,7 +186,7 @@ p {
     color: white;
 }
 
-/* style the five-day-header */
+
 #five-day-header {
     margin-top: 1%;
     margin-bottom: 1%;
