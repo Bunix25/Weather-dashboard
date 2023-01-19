@@ -19,7 +19,7 @@ function titleCase(str) {
         
         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
-    // Directly return the joined string
+    
     return splitStr.join(' ');
 }
 
@@ -66,7 +66,7 @@ function searchHistory(city) {
     searchHistoryEl.append(searchHistoryBtn);
 }
 
-//function to get weather data from apiUrl
+
 function getWeather(city) {
     // apiUrl for coordinates
     var apiCoordinatesUrl = openWeatherCoordinatesUrl + city + '&appid=' + openWeatherApiKey;
